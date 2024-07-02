@@ -12,42 +12,63 @@ Cria um novo cliente com os dados fornecidos.
 Parâmetros de Entrada:
 
 nomeCompleto (string): Nome completo do cliente.
+
 endereco (string): Endereço do cliente.
+
 telefone (string): Número de telefone do cliente.
+
 contas (array de ContaBancaria): Lista de contas bancárias associadas ao cliente.
+
 gerente (Gerente): Informações do gerente associado ao cliente.
 
+
 * GET /cliente/consultar
+
 => Retorna um array de objetos Cliente com todos os clientes.
 
 Conta Endpoints
+
 POST /conta/criar
 
 Parâmetros de Entrada:
+
 clienteId (string): ID do cliente para o qual a conta será criada.
+
 tipo (string): Tipo da conta ("CORRENTE" ou "POUPANÇA").
+
 saldoInicial (number): Saldo inicial da conta.
+
 => Retorna o objeto ContaBancaria criado.
+
 
 * GET /conta/consultar/
 
 Parâmetros de Entrada:
+
 numeroDaConta (string): Número da conta bancária.
+
 => Retorna o objeto ContaBancaria encontrado ou undefined se não encontrado.
+
 
 ### Gerente Endpoints
 
 * POST /gerente/criar
 
 Parâmetros de Entrada:
+
 nomeCompleto (string): Nome completo do gerente.
+
 clientes (array de Cliente): Lista de clientes associados ao gerente.
+
 => Retorna o objeto Gerente criado.
+
 
 * GET /gerente/
 
 Parâmetros de Entrada:
+
 id (string): ID único do gerente.
+
 => Retorna o objeto Gerente encontrado ou undefined se não encontrado.
 
 
