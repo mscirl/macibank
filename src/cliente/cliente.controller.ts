@@ -17,5 +17,4 @@ export class ClienteController {
     async findAll(): Promise<Cliente[]> {
         return this.clienteService.findAll();
     }
-
 }
