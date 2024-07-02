@@ -1,3 +1,6 @@
+![macibank_logo](https://github.com/mscirl/macibank/assets/143663252/e7856599-660a-4db9-90e0-3f28779590ae)
+Logo fictício criado em: https://looka.com/
+
 # Documentação da API - Macibank
 
 ## Endpoints Disponíveis a seguir:
