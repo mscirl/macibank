@@ -42,6 +42,21 @@ Parâmetros de Entrada:
 id (string): ID único do gerente.
 _Retorna o objeto Gerente encontrado ou undefined se não encontrado._
 
+## Pré-requisitos para rodar o projeto em sua máquina:
+* Node.js (versão 12 ou superior)
+* npm (gerenciador de pacotes do Node.js)
+
+### Passos para Clonar e Rodar o Projeto localmente
+Clone o repositório:
+* git clone https://github.com/mscirl/macibank.git
+
+Na pasta do projeto:
+Instale as dependências:
+* npm install
+
+Rode a aplicação:
+* npm run start
+
 
 ## Exemplos de chamadas no insomnia:
 
