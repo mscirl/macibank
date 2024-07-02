@@ -4,20 +4,21 @@
 
 ## Endpoints Disponíveis
 
-###Cliente Endpoints
+### Cliente Endpoints
 POST /cliente/criar
-
 Cria um novo cliente com os dados fornecidos.
 
 **Parâmetros de Entrada:**
-nomeCompleto (string): Nome completo do cliente.
-endereco (string): Endereço do cliente.
-telefone (string): Número de telefone do cliente.
-contas (array de ContaBancaria): Lista de contas bancárias associadas ao cliente.
-gerente (Gerente): Informações do gerente associado ao cliente.
-Retorno: Retorna o objeto Cliente criado.
-GET /cliente/consultar
+* nomeCompleto (string): Nome completo do cliente.
+* endereco (string): Endereço do cliente.
+* telefone (string): Número de telefone do cliente.
+* contas (array de ContaBancaria): Lista de contas bancárias associadas ao cliente.
+* gerente (Gerente): Informações do gerente associado ao cliente.
 
+Retorno: Retorna o objeto Cliente criado.
+
+
+GET /cliente/consultar
 Retorna todos os clientes cadastrados na API.
 Retorno: Retorna um array de objetos Cliente.
 
@@ -26,16 +27,16 @@ Os endpoints relacionados a contas bancárias estão em desenvolvimento.
 
 **Gerente Endpoints**
 POST /gerente
-
 Cria um novo gerente com os dados fornecidos.
+
 Parâmetros de Entrada:
 nomeCompleto (string): Nome completo do gerente.
 clientes (array de Cliente): Lista de clientes associados ao gerente.
 Retorno: Retorna o objeto Gerente criado.
 
 GET /gerente/
-
 Retorna as informações de um gerente específico com base no ID fornecido.
+
 Parâmetros de Entrada:
 id (string): ID único do gerente.
 Retorno: Retorna o objeto Gerente encontrado ou undefined se não encontrado.
@@ -50,7 +51,7 @@ Exemplos visuais de chamadas no insominia:
 
 
 
-##Estrutura do projeto está organizada da seguinte maneira:
+### Estrutura do projeto está organizada da seguinte maneira:
 
 src/
 
