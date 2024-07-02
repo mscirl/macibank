@@ -57,6 +57,9 @@ Instale as dependências:
 Rode a aplicação:
 * npm run start
 
+A aplicação estará rodando em:
+* http://localhost:3000
+
 
 ## Exemplos de chamadas no insomnia:
 
