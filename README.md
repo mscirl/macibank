@@ -9,6 +9,7 @@ _Logo fictício criado em: https://looka.com/_
 **Cliente Endpoints**
 POST /cliente/criar
 _Cria um novo cliente com os dados fornecidos._
+
 Retorna o objeto Cliente criado.
 
 **Parâmetros de Entrada:**
