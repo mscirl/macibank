@@ -42,6 +42,13 @@ id (string): ID único do gerente.
 _Retorna o objeto Gerente encontrado ou undefined se não encontrado._
 
 
+## Exemplos de chamadas no insomnia:
+
+![api01](https://github.com/mscirl/macibank/assets/143663252/80094ff2-6548-4a17-aa21-b230585bc90f)
+
+![api02](https://github.com/mscirl/macibank/assets/143663252/3c1a9950-6df3-4015-a28c-0252291b5432)
+
+
 ## Estrutura do Projeto:
 
 src/
