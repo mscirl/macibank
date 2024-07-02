@@ -14,7 +14,7 @@ export class ClienteController {
     }
 
     @Get('consultar')
-    async findAll(): Promise<Cliente[]> {
+    findAll(): Promise<Cliente[]> {
         return this.clienteService.findAll();
     }
 }

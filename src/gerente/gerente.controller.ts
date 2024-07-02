@@ -1,6 +1,9 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { Gerente } from './gerente.model';
 import { GerenteService } from './gerente.service';
+import { CreateGerenteDto } from './gerente.dto';
+import { Cliente } from '../cliente/cliente.model';
+import { ContaBancaria, TipoConta } from '../conta/conta.model'; // Importe o tipo ContaBancaria, se necessário
 
 @Controller('gerente')
 export class GerenteController {
@@ -11,8 +14,35 @@ export class GerenteController {
         return this.gerenteService.findOne(id);
     }
 
-    @Post()
-    create(@Body() gerente: Gerente): Gerente {
+    @Post('criar')
+    create(@Body() createGerenteDto: CreateGerenteDto): Gerente {
+        const { nomeCompleto, clientes } = createGerenteDto;
+        const gerente = new Gerente(nomeCompleto, clientes);
         return this.gerenteService.create(gerente);
+    }
+
+    @Put(':id/adicionar-cliente')
+    adicionarCliente(@Param('id') id: string, @Body() cliente: Cliente): Gerente | undefined {
+        return this.gerenteService.adicionarCliente(id, cliente);
+    }
+
+    @Put(':id/abrir-conta')
+    abrirConta(@Param('id') id: string, @Body() dados: { clienteId: string; tipo: TipoConta; saldoInicial: number }): Gerente | undefined {
+        return this.gerenteService.abrirConta(id, dados.clienteId, dados.tipo, dados.saldoInicial);
+    }
+
+    @Put(':id/fechar-conta')
+    fecharConta(@Param('id') id: string, @Body() dados: { clienteId: string; contaNumero: string }): Gerente | undefined {
+        return this.gerenteService.fecharConta(id, dados.clienteId, dados.contaNumero);
+    }
+
+    @Put(':id/modificar-tipo-conta')
+    modificarTipoConta(@Param('id') id: string, @Body() dados: { clienteId: string; contaNumero: string; novoTipo: TipoConta }): Gerente | undefined {
+        return this.gerenteService.modificarConta(id, dados.clienteId, dados.contaNumero, dados.novoTipo);
+    }
+
+    @Get()
+    findAll(): Gerente[] {
+        return this.gerenteService.findAll();
     }
 }

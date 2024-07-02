@@ -1,15 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Cliente } from '../cliente/cliente.model';
 
+export enum TipoConta {
+    CORRENTE = 'CORRENTE',
+    POUPANCA = 'POUPANCA',
+}
+
 export class ContaBancaria {
     private saldo: number;
     private numeroDaConta: string;
     private cliente: Cliente;
+    private tipo: TipoConta;
 
-    constructor(cliente: Cliente, saldoInicial: number) {
+    constructor(cliente: Cliente, tipo: TipoConta, saldoInicial: number) {
         this.saldo = saldoInicial;
         this.numeroDaConta = uuidv4();
         this.cliente = cliente;
+        this.tipo = tipo;
     }
 
     depositar(valor: number): void {
@@ -43,5 +50,9 @@ export class ContaBancaria {
 
     getNumeroDaConta(): string {
         return this.numeroDaConta;
+    }
+
+    setTipo(novoTipo: TipoConta): void {
+        this.tipo = novoTipo;
     }
 }

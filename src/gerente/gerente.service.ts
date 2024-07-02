@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Gerente } from './gerente.model'; 
+import { Gerente } from './gerente.model';
+import { Cliente } from '../cliente/cliente.model';
+import { TipoConta } from '../conta/conta.model';
 
 @Injectable()
 export class GerenteService {
-    private readonly gerentes: Gerente[] = []; 
+    private readonly gerentes: Gerente[] = [];
 
     findAll(): Gerente[] {
         return this.gerentes;
@@ -18,19 +20,57 @@ export class GerenteService {
         return gerente;
     }
 
-    update(id: string, gerente: Gerente): Gerente | undefined {
-        const index = this.gerentes.findIndex(g => g.id === id);
-        if (index !== -1) {
-            this.gerentes[index] = gerente;
+    adicionarCliente(id: string, cliente: Cliente): Gerente | undefined {
+        const gerente = this.findOne(id);
+        if (gerente) {
+            gerente.adicionarCliente(cliente);
             return gerente;
         }
-        return undefined; 
+        return undefined;
     }
 
-    remove(id: string): void {
-        const index = this.gerentes.findIndex(g => g.id === id);
-        if (index !== -1) {
-            this.gerentes.splice(index, 1);
+    removerCliente(id: string, clienteId: string): Gerente | undefined {
+        const gerente = this.findOne(id);
+        if (gerente) {
+            gerente.removerCliente(clienteId);
+            return gerente;
         }
+        return undefined;
+    }
+
+    abrirConta(id: string, clienteId: string, tipo: TipoConta, saldoInicial: number): Gerente | undefined {
+        const gerente = this.findOne(id);
+        if (gerente) {
+            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            if (cliente) {
+                gerente.abrirConta(cliente, tipo, saldoInicial);
+                return gerente;
+            }
+        }
+        return undefined;
+    }
+
+    fecharConta(id: string, clienteId: string, contaNumero: string): Gerente | undefined {
+        const gerente = this.findOne(id);
+        if (gerente) {
+            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            if (cliente) {
+                gerente.fecharConta(cliente, contaNumero);
+                return gerente;
+            }
+        }
+        return undefined;
+    }
+
+    modificarConta(id: string, clienteId: string, contaNumero: string, novoTipo: TipoConta): Gerente | undefined {
+        const gerente = this.findOne(id);
+        if (gerente) {
+            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            if (cliente) {
+                gerente.modificarTipoConta(cliente, contaNumero, novoTipo);
+                return gerente;
+            }
+        }
+        return undefined;
     }
 }
