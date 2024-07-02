@@ -53,48 +53,40 @@ _Retorna o objeto Gerente encontrado ou undefined se não encontrado._
 ## Estrutura do Projeto:
 
 src/
+  cliente/
+    cliente.controller.ts        # Controladores para endpoints relacionados a clientes
+    cliente.service.ts           # Lógica de negócio para clientes
+    cliente.model.ts             # Modelo de dados para clientes
+    cliente.module.ts            # Módulo do NestJS para clientes
 
-cliente/
+  conta/
+    conta.controller.ts          # Controladores para endpoints relacionados a contas bancárias
+    conta.service.ts             # Lógica de negócio para contas bancárias
+    conta.model.ts               # Modelo de dados para contas bancárias
+    conta.module.ts              # Módulo do NestJS para contas bancárias
 
-cliente.controller.ts: Controladores para endpoints relacionados a clientes.
+  gerente/
+    gerente.controller.ts        # Controladores para endpoints relacionados a gerentes
+    gerente.service.ts           # Lógica de negócio para gerentes
+    gerente.model.ts             # Modelo de dados para gerentes
+    gerente.module.ts            # Módulo do NestJS para gerentes
 
-
-cliente.service.ts: Lógica de negócio para clientes.
-
-cliente.model.ts: Modelo de dados para clientes.
-
-cliente.module.ts: Módulo do NestJS para clientes.
-
-conta/
-
-conta.controller.ts: Controladores para endpoints relacionados a contas bancárias.
-
-conta.service.ts: Lógica de negócio para contas bancárias.
-
-conta.model.ts: Modelo de dados para contas bancárias.
-
-conta.module.ts: Módulo do NestJS para contas bancárias.
-
-gerente/
-
-gerente.controller.ts: Controladores para endpoints relacionados a gerentes.
-
-gerente.service.ts: Lógica de negócio para gerentes.
-
-gerente.model.ts: Modelo de dados para gerentes.
-
-gerente.module.ts: Módulo do NestJS para gerentes.
-
-app.controller.ts: Controladores principais da aplicação.
-
-app.module.ts: Módulo principal da aplicação.
-
-app.service.ts: Serviços principais da aplicação.
-
-helpers.ts: Funções auxiliares para validações e lógica de negócio.
-
-main.ts: Arquivo de entrada principal da aplicação.
+  app.controller.ts              # Controladores principais da aplicação
+  app.module.ts                  # Módulo principal da aplicação
+  app.service.ts                 # Serviços principais da aplicação
+  helpers.ts                     # Funções auxiliares para validações e lógica de negócio
+  main.ts                        # Arquivo de entrada principal da aplicação
 
 test/
+  # Arquivos de teste para os diferentes módulos da aplicação
 
-Arquivos de teste para os diferentes módulos da aplicação.
+.eslintrc.js                      # Configurações do ESLint
+.gitignore                        # Arquivos e diretórios ignorados pelo Git
+nest-cli.json                     # Configurações do Nest CLI
+nodemon.json                      # Configurações do Nodemon
+package-lock.json                 # Dependências bloqueadas para a instalação
+package.json                      # Dependências e scripts do projeto
+README.md                         # Documentação do projeto
+tsconfig.build.json               # Configurações de build do TypeScript
+tsconfig.json                     # Configurações do TypeScript
+
