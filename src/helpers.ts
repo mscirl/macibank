@@ -13,7 +13,6 @@ export function gerenteDaConta(gerente: string){
     } return null;
 }
 
-// Aqui são criadas variáveis
 export function gerarIdUnico(idsExistente: string[], idAtual: string): string {
     if (idsExistente.includes(idAtual)) {
         let novoId = uuidv4();

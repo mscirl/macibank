@@ -16,7 +16,6 @@ export class Cliente {
     gerente: Gerente;
 
     constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], gerente: Gerente) {
-            // Verifica se o nomeCompleto já existe na lista de cliente e se sim, traz o resultado, se não, cria um cliente novo
             const index = listaNomes.indexOf(nomeCompleto);
             if (index !== -1) {
                 this.id = listaIds[index];

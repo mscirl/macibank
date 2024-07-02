@@ -3,7 +3,7 @@ import { Gerente } from './gerente.model';
 import { GerenteService } from './gerente.service';
 import { CreateGerenteDto } from './gerente.dto';
 import { Cliente } from '../cliente/cliente.model';
-import { ContaBancaria, TipoConta } from '../conta/conta.model'; // Importe o tipo ContaBancaria, se necessário
+import { ContaBancaria, TipoConta } from '../conta/conta.model';
 
 @Controller('gerente')
 export class GerenteController {
