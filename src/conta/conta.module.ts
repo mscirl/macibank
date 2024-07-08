@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ContaController } from './conta.controller';
-import { ContaService } from './conta.service';
+import { ContaController } from '../controllers/conta.controller';
+import { ContaService } from '../services/conta.service';
 
 @Module({
     controllers: [ContaController],

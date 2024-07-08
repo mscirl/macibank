@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
-import { Gerente } from './gerente.model';
-import { GerenteService } from './gerente.service';
-import { CreateGerenteDto } from './gerente.dto';
-import { Cliente } from '../cliente/cliente.model';
-import { ContaBancaria, TipoConta } from '../conta/conta.model';
+import { Gerente } from '../models/gerente.model';
+import { GerenteService } from '../services/gerente.service';
+import { CreateGerenteDto } from '../dtos/gerente.dto';
+import { Cliente } from '../models/cliente.model';
+import { TipoConta } from '../models/conta.model';
 
 @Controller('gerente')
 export class GerenteController {

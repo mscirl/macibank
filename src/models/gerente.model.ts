@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Cliente } from '../cliente/cliente.model';
-import { ContaBancaria, TipoConta } from '../conta/conta.model';
+import { Cliente } from './cliente.model';
+import { ContaBancaria, TipoConta } from '../models/conta.model';
 
 let listaNomesGerentes: string []= [];
 let listaIdsGerentes: string []= [];

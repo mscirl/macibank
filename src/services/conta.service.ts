@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ContaBancaria, TipoConta } from './conta.model';
-import { Cliente } from '../cliente/cliente.model';
+import { ContaBancaria, TipoConta } from '../models/conta.model';
+import { Cliente } from '../models/cliente.model';
 
 @Injectable()
 export class ContaService {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Cliente } from './cliente.model';
-import { Gerente } from '../gerente/gerente.model';
-import { ContaBancaria } from '../conta/conta.model';
+import { Cliente } from '../models/cliente.model';
+import { Gerente } from '../models/gerente.model';
+import { ContaBancaria } from '../models/conta.model';
 
 @Injectable()
 export class ClienteService {
@@ -35,3 +35,5 @@ export class ClienteService {
         throw new Error(`Cliente de Id ${id} não encontrado.`);
     }
 }
+
+export { Cliente };

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Cliente } from '../cliente/cliente.model';
+import { Cliente } from '../models/cliente.model';
+import { metodoDePagamento } from './pagamento.model';
 
 export enum TipoConta {
     CORRENTE = 'CORRENTE',
@@ -55,4 +56,14 @@ export class ContaBancaria {
     setTipo(novoTipo: TipoConta): void {
         this.tipo = novoTipo;
     }
+
+    pagar(valor: number, metodo: metodoDePagamento){
+        if (valor >= this.saldo){
+            this.saldo -= valor;
+            metodo.processaPagamento(valor);
+        }else{
+            throw new Error(`Seu saldo de ${this.saldo} é insuficiente para realizar o pagamento de ${valor}`)
+        }
+    }
+
 }

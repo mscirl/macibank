@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Gerente } from './gerente.model';
-import { Cliente } from '../cliente/cliente.model';
-import { TipoConta } from '../conta/conta.model';
+import { Gerente } from '../models/gerente.model';
+import { Cliente } from '../models/cliente.model';
+import { TipoConta } from '../models/conta.model';
 
 @Injectable()
 export class GerenteService {
