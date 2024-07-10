@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ContaService } from '../services/conta.service';
-import { PagamentoBoleto, PagamentoPix, metodoDePagamento } from '../models/pagamento.model';
-import { TipoPagamentos } from '../enums/enum.conta/pagamento.enum';
 import { PagamentoDto } from '../dtos/pagamento.dto';
-import { Subject } from '../subjects/subject';
+import { TipoPagamentos } from '../enums/pagamento.enum';
+import { PagamentoBoleto, PagamentoPix, metodoDePagamento } from '../models/pagamento.model';
 import { SMSObserver } from '../observers/observer.sms';
+import { ContaService } from '../services/conta.service';
+import { Subject } from '../subjects/subject';
 
 @Controller('conta')
 export class ContaController {
