@@ -46,7 +46,8 @@ _Retorna o objeto Gerente encontrado ou undefined se não encontrado._
 * Node.js (versão 12 ou superior)
 * npm (gerenciador de pacotes do Node.js)
 
-### Passos para Clonar e Rodar o Projeto localmente
+### Passos para Clonar e Rodar o Projeto localmente:
+
 Clone o repositório:
 * git clone https://github.com/mscirl/macibank.git
 
@@ -55,11 +56,9 @@ Instale as dependências:
 * npm install
 
 Rode a aplicação:
-* npm run start
+* npm run start:dev
 
-A aplicação estará rodando em:
-* http://localhost:3000
-
+As rotas da aplicação podem ser testadas no Insomnia ou Postman.
 
 ## Exemplos de chamadas no insomnia:
 
