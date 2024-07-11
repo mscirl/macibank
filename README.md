@@ -135,5 +135,5 @@ cliente/
 
     tsconfig.build.json               # Configurações de build do TypeScript
 
-tsconfig.json                     # Configurações do TypeScript
+    tsconfig.json                     # Configurações do TypeScript
 
