@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { GerenteModule } from './gerente/gerente.module';
-import { ClienteModule } from './cliente/cliente.module';
-import { ContaModule } from './conta/conta.module';
+import { ClienteModule } from './modules/cliente.module';
+import { ContaModule } from './modules/conta.module';
+import { GerenteModule } from './modules/gerente.module';
 
 @Module({
     imports: [GerenteModule, ClienteModule, ContaModule],
