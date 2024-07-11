@@ -69,8 +69,8 @@ As rotas da aplicação podem ser testadas no Insomnia ou Postman.
 
 ## Estrutura do Projeto:
 
-src/
-  cliente/
+    src/
+    cliente/
     cliente.controller.ts        # Controladores para endpoints relacionados a clientes
 
     cliente.service.ts           # Lógica de negócio para clientes
@@ -102,37 +102,36 @@ src/
     
     gerente.module.ts            # Módulo do NestJS para gerentes
 
+    app.controller.ts              # Controladores principais da aplicação
+  
+    app.module.ts                  # Módulo principal da aplicação
+  
+    app.service.ts                 # Serviços principais da aplicação
+  
+    helpers.ts                     # Funções auxiliares para validações e lógica de negócio
+  
+    main.ts                        # Arquivo de entrada principal da aplicação
 
-
-  app.controller.ts              # Controladores principais da aplicação
-  
-  app.module.ts                  # Módulo principal da aplicação
-  
-  app.service.ts                 # Serviços principais da aplicação
-  
-  helpers.ts                     # Funções auxiliares para validações e lógica de negócio
-  
-  main.ts                        # Arquivo de entrada principal da aplicação
-
-test/
+    test/
+    
   # Arquivos de teste para os diferentes módulos da aplicação
 
 
-.eslintrc.js                      # Configurações do ESLint
+    .eslintrc.js                      # Configurações do ESLint
 
-.gitignore                        # Arquivos e diretórios ignorados pelo Git
+    .gitignore                        # Arquivos e diretórios ignorados pelo Git
 
-nest-cli.json                     # Configurações do Nest CLI
+    nest-cli.json                     # Configurações do Nest CLI
 
-nodemon.json                      # Configurações do Nodemon
+    nodemon.json                      # Configurações do Nodemon
 
-package-lock.json                 # Dependências bloqueadas para a instalação
+    package-lock.json                 # Dependências bloqueadas para a instalação
 
-package.json                      # Dependências e scripts do projeto
+    package.json                      # Dependências e scripts do projeto
 
-README.md                         # Documentação do projeto
+    README.md                         # Documentação do projeto
 
-tsconfig.build.json               # Configurações de build do TypeScript
+    tsconfig.build.json               # Configurações de build do TypeScript
 
 tsconfig.json                     # Configurações do TypeScript
 
