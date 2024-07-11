@@ -70,7 +70,9 @@ As rotas da aplicação podem ser testadas no Insomnia ou Postman.
 ## Estrutura do Projeto:
 
 src/
+
 cliente/
+
     cliente.controller.ts        # Controladores para endpoints relacionados a clientes
 
     cliente.service.ts           # Lógica de negócio para clientes
