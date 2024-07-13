@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Gerente } from './gerente.model';
-import { validaNome, gerenteDaConta } from '../helpers';
+import { gerenteDaConta, validaNome } from '../helpers/helpers';
 import { ContaBancaria } from '../models/conta.model';
+import { Gerente } from './gerente.model';
 
 let listaIds: string[] = [];
 let listaNomes: string[] = [];

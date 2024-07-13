@@ -2,22 +2,31 @@ import { v4 as uuidv4 } from 'uuid';
 import { Cliente } from '../models/cliente.model';
 import { metodoDePagamento } from './pagamento.model';
 
+
 export enum TipoConta {
     CORRENTE = 'CORRENTE',
     POUPANCA = 'POUPANCA',
 }
 
 export class ContaBancaria {
-    private saldo: number;
-    private numeroDaConta: string;
-    private cliente: Cliente;
-    private tipo: TipoConta;
+    id: string;
+    cliente: Cliente;
+    tipo: TipoConta;
+    saldo: number;
 
     constructor(cliente: Cliente, tipo: TipoConta, saldoInicial: number) {
-        this.saldo = saldoInicial;
-        this.numeroDaConta = uuidv4();
+        this.id = uuidv4();
         this.cliente = cliente;
         this.tipo = tipo;
+        this.saldo = saldoInicial;
+    }
+
+    getNumeroDaConta(): string {
+        return this.id;
+    }
+
+    private gerarIdUnico(): string {
+        return Math.random().toString(36).substr(2, 9);
     }
 
     depositar(valor: number): void {
@@ -47,10 +56,6 @@ export class ContaBancaria {
 
     verificarSaldo(): string {
         return `O seu saldo atual é de ${this.saldo}`;
-    }
-
-    getNumeroDaConta(): string {
-        return this.numeroDaConta;
     }
 
     setTipo(novoTipo: TipoConta): void {

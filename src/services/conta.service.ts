@@ -12,6 +12,11 @@ export class ContaService {
         return novaConta;
     }
 
+    getContaById(id: string): ContaBancaria | undefined {
+        return this.contas.find(conta => conta.id === id);
+    }
+
+
     encontrarContaPorNumero(numeroConta: string): ContaBancaria | undefined {
         return this.contas.find(conta => conta.getNumeroDaConta() === numeroConta);
     }

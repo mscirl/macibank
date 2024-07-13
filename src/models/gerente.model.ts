@@ -1,13 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Cliente } from './cliente.model';
+import { validaNome } from '../helpers/helpers';
 import { ContaBancaria, TipoConta } from '../models/conta.model';
+import { Cliente } from './cliente.model';
 
 let listaNomesGerentes: string []= [];
 let listaIdsGerentes: string []= [];
 
 export class Gerente {
     nomeCompleto: string;
-    id: string = ''; 
+    id: string = '';
     clientes: Cliente[];
 
     constructor(nomeCompleto: string, clientes: Cliente[]) {
@@ -23,6 +24,12 @@ export class Gerente {
         this.nomeCompleto = nomeCompleto;
         this.id = uuidv4();
         this.clientes = clientes;
+
+        const mensagemErroNomeGerente = validaNome(nomeCompleto);
+        if (mensagemErroNomeGerente) {
+            throw new Error(mensagemErroNomeGerente);
+        }
+
     }
 
     adicionarCliente(cliente: Cliente): void {

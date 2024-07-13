@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Gerente } from '../models/gerente.model';
 import { Cliente } from '../models/cliente.model';
 import { TipoConta } from '../models/conta.model';
+import { Gerente } from '../models/gerente.model';
 
 @Injectable()
 export class GerenteService {
-    private readonly gerentes: Gerente[] = [];
+    private gerentes: Gerente[] = [];
 
     findAll(): Gerente[] {
         return this.gerentes;
