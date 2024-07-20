@@ -1,5 +1,5 @@
 import { TipoPagamentos } from "../enums/pagamento.enum";
-import { Observer } from "./observer.sms.interface";
+import { Observer } from "../interfaces/observer.sms.interface";
 
 export class SMSObserver implements Observer {
     update(data: any): void {

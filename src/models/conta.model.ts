@@ -1,12 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
+import { TipoConta } from '../enums/conta.enum';
 import { Cliente } from '../models/cliente.model';
 import { metodoDePagamento } from './pagamento.model';
-
-
-export enum TipoConta {
-    CORRENTE = 'CORRENTE',
-    POUPANCA = 'POUPANCA',
-}
 
 export class ContaBancaria {
     id: string;
@@ -23,10 +18,6 @@ export class ContaBancaria {
 
     getNumeroDaConta(): string {
         return this.id;
-    }
-
-    private gerarIdUnico(): string {
-        return Math.random().toString(36).substr(2, 9);
     }
 
     depositar(valor: number): void {
@@ -72,3 +63,5 @@ export class ContaBancaria {
     }
 
 }
+export { TipoConta };
+

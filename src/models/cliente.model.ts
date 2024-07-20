@@ -9,7 +9,7 @@ let listaNomes: string[] = [];
 
 export class Cliente {
     nomeCompleto: string;
-    id: string = ''; 
+    id: string = '';
     endereco: string;
     telefone: string;
     contas: ContaBancaria[];

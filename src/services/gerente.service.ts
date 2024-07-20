@@ -38,10 +38,14 @@ export class GerenteService {
         return undefined;
     }
 
+    private buscarCliente(gerente: Gerente, clienteId: string): Cliente | undefined {
+        return gerente.clientes.find(cliente => cliente.id === clienteId);
+    }
+
     abrirConta(id: string, clienteId: string, tipo: TipoConta, saldoInicial: number): Gerente | undefined {
         const gerente = this.findOne(id);
         if (gerente) {
-            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            const cliente = this.buscarCliente(gerente, clienteId);
             if (cliente) {
                 gerente.abrirConta(cliente, tipo, saldoInicial);
                 return gerente;
@@ -50,10 +54,11 @@ export class GerenteService {
         return undefined;
     }
 
+
     fecharConta(id: string, clienteId: string, contaNumero: string): Gerente | undefined {
         const gerente = this.findOne(id);
         if (gerente) {
-            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            const cliente = this.buscarCliente(gerente, clienteId);
             if (cliente) {
                 gerente.fecharConta(cliente, contaNumero);
                 return gerente;
@@ -65,7 +70,7 @@ export class GerenteService {
     modificarConta(id: string, clienteId: string, contaNumero: string, novoTipo: TipoConta): Gerente | undefined {
         const gerente = this.findOne(id);
         if (gerente) {
-            const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+            const cliente = this.buscarCliente(gerente, clienteId);
             if (cliente) {
                 gerente.modificarTipoConta(cliente, contaNumero, novoTipo);
                 return gerente;
@@ -74,3 +79,4 @@ export class GerenteService {
         return undefined;
     }
 }
+

@@ -1,6 +1,5 @@
-export interface metodoDePagamento{
-    processaPagamento(valor: number):void;
-}
+import { metodoDePagamento } from "../interfaces/pagamento.interface"
+
 
 export class PagamentoPix implements metodoDePagamento {
     processaPagamento(valor: number): void {
@@ -13,3 +12,5 @@ export class PagamentoBoleto implements metodoDePagamento {
         console.log(`Pagamento por boleto realizado com sucesso! Obs: A compensação é feita em horário bancário.`)
     }
 }
+
+export { metodoDePagamento }

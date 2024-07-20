@@ -12,7 +12,7 @@ import { Subject } from '../subjects/subject';
 export class ContaController {
     constructor(private readonly contaService: ContaService) {}
 
-    @Post('pagar')
+    @Post('/pagar')
     // Utilizado async pq não tem nenhuma interação com banco de dados,
     // caso tivesse, utilizaria await, isso garante que a consulta continue sem erros
     // Sincrona: acontece em tempo real; Assincrona: não acontece em tempo real (pois o pgto pode ocorrer a qualquer momento)

@@ -1,4 +1,4 @@
-import { Observer } from "../observers/observer.sms.interface";
+import { Observer } from "../interfaces/observer.sms.interface";
 
 export class Subject {
     private observers: Observer [] = [];

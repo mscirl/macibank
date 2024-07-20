@@ -1,4 +1,4 @@
-import { TipoTransacao } from "../enums/tipotransacao";
+import { TipoTransacao } from "../enums/tipotransacao.enum";
 import { ContaBancaria } from "../models/conta.model";
 import { Transacao } from "./transacao.factory";
 

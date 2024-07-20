@@ -3,33 +3,25 @@ import { validaNome } from '../helpers/helpers';
 import { ContaBancaria, TipoConta } from '../models/conta.model';
 import { Cliente } from './cliente.model';
 
-let listaNomesGerentes: string []= [];
-let listaIdsGerentes: string []= [];
 
 export class Gerente {
     nomeCompleto: string;
-    id: string = '';
+    id: string;
     clientes: Cliente[];
 
     constructor(nomeCompleto: string, clientes: Cliente[]) {
-        const index = listaNomesGerentes.indexOf(nomeCompleto);
-        if (index !== -1) {
-            this.id = listaIdsGerentes[index];
-        } else {
-            this.id = uuidv4();
-            listaIdsGerentes.push(this.id);
-            listaNomesGerentes.push(nomeCompleto);
-        }
-
+        this.validarNome(nomeCompleto);
         this.nomeCompleto = nomeCompleto;
         this.id = uuidv4();
         this.clientes = clientes;
+    }
 
+
+    private validarNome(nomeCompleto: string): void {
         const mensagemErroNomeGerente = validaNome(nomeCompleto);
-        if (mensagemErroNomeGerente) {
+        if(mensagemErroNomeGerente){
             throw new Error(mensagemErroNomeGerente);
         }
-
     }
 
     adicionarCliente(cliente: Cliente): void {
