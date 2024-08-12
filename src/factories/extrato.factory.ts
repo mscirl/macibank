@@ -1,5 +1,5 @@
-import { TipoTransacao } from "../enums/tipotransacao.enum";
-import { ContaBancaria } from "../models/conta.model";
+import { ContaBancaria } from "../domain/entities/conta.entity";
+import { TipoTransacao } from "../domain/enums/tipo-de-transacao.enum";
 import { Transacao } from "./transacao.factory";
 
 export class ExtratoFactory {
