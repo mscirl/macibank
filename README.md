@@ -1,5 +1,6 @@
 <b>/DOCUMENTAÇÃO EM CONSTRUÇÃO/</b>
 
+
 ![macibank_logo](https://github.com/mscirl/macibank/assets/143663252/508e7015-958e-4b9c-afda-314c50d6dace)
 Logo fictício criado em: https://looka.com/
 
