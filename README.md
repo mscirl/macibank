@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <b>/DOCUMENTAÇÃO EM CONSTRUÇÃO/</b>
 
 
@@ -142,3 +143,5 @@ src/
 test/
 
 └── Arquivos de teste para os diferentes módulos da aplicação.
+=======
+>>>>>>> 796f5ddf375211b18931be74d7568ddc9fe18ae6
