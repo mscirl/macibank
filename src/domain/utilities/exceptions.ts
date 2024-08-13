@@ -8,6 +8,9 @@ export class NomeInvalidoException extends Error {
 }
 
 export function nomeInvalidoException(nomeCompleto: string) {
+    if(!nomeCompleto){
+        throw new NomeInvalidoException;
+    }
     const nome = nomeCompleto.trim().split(/\s+/); // verifica se existe, pelo menos, duas palavras separadas por espaço
     if (nomeCompleto === "" || nome.length < 2) {
         throw new NomeInvalidoException();
@@ -31,7 +34,7 @@ export function contaBancariaInvalidaException(numeroConta: string) {
 
 export class ClienteNaoEncontradoException extends Error {
     constructor(id: string) {
-        super(`Pessoa cliente liente de id ${id} não encontrada.`);
+        super(`Pessoa cliente de id ${id} não encontrada.`);
         this.name = 'ClienteNaoEncontradoException';
     }
 }

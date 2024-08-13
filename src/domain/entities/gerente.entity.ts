@@ -1,17 +1,26 @@
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
-import { nomeInvalidoException } from '../exceptions/exceptions';
+import { nomeInvalidoException } from '../utilities/exceptions';
+import { gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
 import { ContaBancaria } from './conta.entity';
 
+
+@Entity()
 export class Gerente {
-    nomeCompleto: string;
+    @PrimaryGeneratedColumn('uuid')
     id: string;
+
+    @Column()
+    nomeCompleto: string;
+
+    @OneToMany(() => Cliente, (cliente) => cliente.gerente, { cascade: true })
     clientes: Cliente[];
 
-    constructor(nomeCompleto: string, clientes: Cliente[]) {
-        this.nomeCompleto = nomeCompleto;
+    constructor(nomeCompleto: string, clientes: Cliente[] = []) {
         this.id = uuidv4();
+        this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
 
         nomeInvalidoException(nomeCompleto);
@@ -26,12 +35,14 @@ export class Gerente {
     }
 
     abrirConta(cliente: Cliente, tipo: TipoConta, saldoInicial: number): ContaBancaria {
-        const numeroConta = this.gerarNumeroConta();
+        const numeroConta = gerarNumeroConta();
+        console.log('Número da conta gerado:', numeroConta);
         const novaConta = new ContaBancaria(cliente, numeroConta, saldoInicial, tipo);
         cliente.contas.push(novaConta);
         return novaConta;
     }
-
+    
+    
     fecharConta(cliente: Cliente, contaNumero: string): void {
         cliente.contas = cliente.contas.filter(conta => conta.getNumeroDaConta() !== contaNumero);
     }
@@ -39,11 +50,8 @@ export class Gerente {
     modificarTipoConta(cliente: Cliente, contaNumero: string, novoTipo: TipoConta): void {
         const conta = cliente.contas.find(conta => conta.getNumeroDaConta() === contaNumero);
         if (conta) {
-            conta.setTipo(novoTipo); // set pra alterar dados set => setar
+            conta.setTipo(novoTipo);
         }
     }
 
-    private gerarNumeroConta(): string {
-        return Math.random().toString().substring(2, 10);
-    }
 }

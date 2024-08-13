@@ -5,7 +5,7 @@ import { GerenteDto } from "../../aplication/dtos/gerente.dto";
 import { Cliente } from "../entities/cliente.entity";
 import { TipoConta } from "../entities/conta.entity";
 import { Gerente } from "../entities/gerente.entity";
-import { gerenteInvalidoException, nomeInvalidoException } from "../exceptions/exceptions";
+import { gerenteInvalidoException, nomeInvalidoException } from "../utilities/exceptions";
 
 @Injectable()
 export class GerenteService {

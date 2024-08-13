@@ -1,16 +1,27 @@
-import { metodoDePagamento } from "../repositories/pagamento.repository"
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { v4 as uuidv4 } from 'uuid';
+import { TipoConta } from './conta.entity';
 
 
-export class PagamentoPix implements metodoDePagamento {
-    processaPagamento(valor: number): void {
-        console.log(`Pagamento por pix realizado com sucesso!`)
+@Entity()
+export class Pagamento {
+    @PrimaryGeneratedColumn()
+    id: string;
+
+    @Column()
+    tipo: string;
+
+    @Column('decimal')
+    valor: number;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    data: Date;
+
+    constructor(id: string, tipo: TipoConta, valor: number, data: Date){
+        this.id = uuidv4();
+        this.tipo = tipo;
+        this.valor = valor;
+        this.data = data;
     }
-}
 
-export class PagamentoBoleto implements metodoDePagamento {
-    processaPagamento(valor: number): void {
-        console.log(`Pagamento por boleto realizado com sucesso! Obs: A compensação é feita em horário bancário.`)
-    }
 }
-
-export { metodoDePagamento }

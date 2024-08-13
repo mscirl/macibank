@@ -1,6 +1,6 @@
 import { Body, Controller, Get, HttpException, HttpStatus, NotFoundException, Param, Post } from '@nestjs/common';
 import { PagamentoDto } from '../../aplication/dtos/pagamento.dto';
-import { PagamentoBoleto, PagamentoPix, metodoDePagamento } from '../../domain/entities/pagamento.entity';
+import { PagamentoBoleto, PagamentoPix, metodoDePagamento } from '../../domain/entities/metodos-de-pagamento.entity';
 import { TipoPagamentos } from '../../domain/enums/pagamento.enum';
 import { ContaService } from '../../domain/services/conta.service';
 import { ExtratoFactory } from '../../factories/extrato.factory';

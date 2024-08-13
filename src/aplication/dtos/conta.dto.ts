@@ -5,7 +5,7 @@ export class ContaBancariaDto {
     @IsString()
     @IsNotEmpty({ message: 'Por favor, digite o número da conta para prosseguir.' })
     @Length(8)
-    numero: string;
+    numeroConta: string;
 
     @IsNumber()
     saldo: number;
@@ -14,8 +14,8 @@ export class ContaBancariaDto {
     @IsNotEmpty({ message: `Por gentileza, informe o tipo de sua conta bancária. Opções possíveis: ${TipoConta.CORRENTE}, ${TipoConta.POUPANCA}.` })
     tipo: TipoConta;
 
-    constructor(numero: string, saldo: number, tipo: TipoConta) {
-        this.numero = numero;
+    constructor(numeroConta: string, saldo: number, tipo: TipoConta) {
+        this.numeroConta = numeroConta;
         this.saldo = saldo;
         this.tipo = tipo;
     }

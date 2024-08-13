@@ -1,24 +1,36 @@
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
-import { contaBancariaInvalidaException } from '../exceptions/exceptions';
+import { contaBancariaInvalidaException } from '../utilities/exceptions';
+import { gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
-import { metodoDePagamento } from './pagamento.entity';
+import { metodoDePagamento } from './metodos-de-pagamento.entity';
 
+@Entity()
 export class ContaBancaria {
+    @PrimaryGeneratedColumn('uuid')
     id: string;
-    numero: string;
+
+    @Column()
+    numeroConta: string;
+
+    @Column('decimal')
     saldo: number;
+
+    @Column({ type: 'enum', enum: TipoConta })
     tipo: TipoConta;
+
+    @ManyToOne(() => Cliente, (cliente) => cliente.contas)
     cliente: Cliente;
 
-    constructor(cliente: Cliente, numero: string, saldo: number, tipo: TipoConta) {
+    constructor(cliente: Cliente, numeroConta: string = gerarNumeroConta(), saldo: number, tipo: TipoConta) {
         this.id = uuidv4();
         this.cliente = cliente;
-        this.numero = numero;
+        this.numeroConta = numeroConta;
         this.saldo = saldo;
         this.tipo = tipo;
-
-        contaBancariaInvalidaException(numero);
+    
+        contaBancariaInvalidaException(this.numeroConta);
     }
 
     pagar(valor: number, metodoDePagamento: metodoDePagamento): void {
@@ -36,9 +48,8 @@ export class ContaBancaria {
         console.log(`Pagamento de R$${valor.toFixed(2)} realizado com sucesso. Novo saldo em conta: R$${this.saldo.toFixed(2)}.`);
     }
 
-
     getNumeroDaConta(): string {
-        return this.numero;
+        return this.numeroConta;
     }
 
     setTipo(novoTipo: TipoConta): void {

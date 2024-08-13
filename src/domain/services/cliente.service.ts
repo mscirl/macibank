@@ -29,7 +29,7 @@ export class ClienteService {
         gerente.adicionarCliente(novoCliente);
 
         const contasEntidades = contas.map(contaDto => {
-            return new ContaBancaria(novoCliente, contaDto.numero, contaDto.saldo, contaDto.tipo);
+            return new ContaBancaria(novoCliente, contaDto.numeroConta, contaDto.saldo, contaDto.tipo);
         });
 
         novoCliente.contas = contasEntidades;
