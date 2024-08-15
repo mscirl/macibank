@@ -32,7 +32,9 @@ export class Cliente {
         this.contas = contas;
         this.gerente = gerente;
     
-        nomeInvalidoException(nomeCompleto);
+        nomeInvalidoException('GAL COSTA');
+
     }
+
     
 }

@@ -7,15 +7,18 @@ export class NomeInvalidoException extends Error {
     }
 }
 
-export function nomeInvalidoException(nomeCompleto: string) {
-    if(!nomeCompleto){
-        throw new NomeInvalidoException;
+export function nomeInvalidoException(nomeCompleto: string | undefined) { // pra não dar erro quando o nome não for declarado
+    console.log("Validando nome completo:", nomeCompleto);
+    if (!nomeCompleto || typeof nomeCompleto !== 'string') {
+        throw new NomeInvalidoException();
     }
     const nome = nomeCompleto.trim().split(/\s+/); // verifica se existe, pelo menos, duas palavras separadas por espaço
-    if (nomeCompleto === "" || nome.length < 2) {
+    if (nome.length < 2) {
         throw new NomeInvalidoException();
     }
 }
+
+
 
 
 export class ContaBancariaInvalidaException extends Error {

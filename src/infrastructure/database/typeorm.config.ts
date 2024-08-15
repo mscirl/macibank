@@ -6,11 +6,12 @@ import { Pagamento } from '../../domain/entities/pagamento.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
 type: 'postgres',
-host: 'localhost',
+host: '127.0.0.1',
 port: 5432,
 username: 'thais',
 password: '00O3.GvDk',
 database: 'macibank',
 entities: [Cliente, ContaBancaria, Gerente, Pagamento],
 synchronize: true,
+logging: true
 };

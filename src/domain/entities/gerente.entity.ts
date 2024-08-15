@@ -18,12 +18,12 @@ export class Gerente {
     @OneToMany(() => Cliente, (cliente) => cliente.gerente, { cascade: true })
     clientes: Cliente[];
 
-    constructor(nomeCompleto: string, clientes: Cliente[] = []) {
+    constructor(nomeCompleto: string, clientes: Cliente[]) {
         this.id = uuidv4();
         this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
 
-        nomeInvalidoException(nomeCompleto);
+        nomeInvalidoException('JORGE AMADO');
     }
 
     adicionarCliente(cliente: Cliente): void {

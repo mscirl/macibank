@@ -39,8 +39,12 @@ export class GerenteService {
 
     async criarGerente(gerenteDto: GerenteDto): Promise<Gerente> {
         nomeInvalidoException(gerenteDto.nomeCompleto);
-    
-        const novoGerente = this.gerenteRepository.create(gerenteDto);
+        
+        const novoGerente = this.gerenteRepository.create({
+            ...gerenteDto,  // aqui os pontos passam todos os dados do DTO
+        });
+
+        // Salva o novo gerente no banco de dados
         return this.gerenteRepository.save(novoGerente);
     }
 
