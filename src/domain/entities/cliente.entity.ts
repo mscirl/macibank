@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { nomeInvalidoException } from '../utilities/exceptions';
+import { gerarCodigoSequencial } from '../utilities/utility';
 import { ContaBancaria } from './conta.entity';
-import { Gerente } from './gerente.entity';
 
 
 @Entity()
@@ -19,19 +19,20 @@ export class Cliente {
     @Column()
     telefone: string;
 
-    @ManyToOne(() => Gerente, (gerente) => gerente.clientes, { nullable: true })
-    gerente?: Gerente;
-
     @OneToMany(() => ContaBancaria, (conta) => conta.cliente)
     contas: ContaBancaria[];
-    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], gerente?: Gerente) {
+
+    @Column({ unique: true })
+    codigoPessoaGerente: number;
+
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], codigoPessoaGerente: number) {
         this.id = uuidv4();
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
-        this.gerente = gerente;
-    
+        this.codigoPessoaGerente = codigoPessoaGerente ?? gerarCodigoSequencial(); //aqui eu verifico se o código da pessoa gerente já existe,
+                                                                                   //caso não exista, vai utilizar da function gerarCodigoSequencial para tal
         nomeInvalidoException('GAL COSTA');
 
     }

@@ -8,9 +8,9 @@ export class ClienteController {
     constructor(private readonly clienteService: ClienteService) {}
 
     @Post('criar')
-    async createCliente(@Body() clienteDto: ClienteDto): Promise<Cliente> {
+    async createCliente(@Body() clienteDto: ClienteDto, codigoPessoaGerente: number): Promise<Cliente> {
         try {
-            return await this.clienteService.createCliente(clienteDto);
+            return await this.clienteService.criarCliente(clienteDto, codigoPessoaGerente);
         } catch (error: any) {
             throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
         }

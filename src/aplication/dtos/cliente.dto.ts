@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
 import { ContaBancariaDto } from './conta.dto';
 
 export class ClienteDto {
@@ -20,21 +20,10 @@ export class ClienteDto {
     @Type(() => ContaBancariaDto)
     contas: ContaBancariaDto[];
 
-    @IsString()
-    @IsOptional()
-    gerenteId: string;
-
-    constructor(
-        nomeCompleto: string,
-        endereco: string,
-        telefone: string,
-        contas: ContaBancariaDto[],
-        gerenteId: string,
-    ) {
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancariaDto[]) {
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
-        this.gerenteId = gerenteId;
     }
 }

@@ -2,7 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
 import { nomeInvalidoException } from '../utilities/exceptions';
-import { gerarNumeroConta } from '../utilities/utility';
+import { gerarCodigoSequencial, gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
 import { ContaBancaria } from './conta.entity';
 
@@ -15,13 +15,17 @@ export class Gerente {
     @Column()
     nomeCompleto: string;
 
-    @OneToMany(() => Cliente, (cliente) => cliente.gerente, { cascade: true })
+    @OneToMany(() => Cliente, (cliente) => cliente.codigoPessoaGerente, { cascade: true })
     clientes: Cliente[];
 
-    constructor(nomeCompleto: string, clientes: Cliente[]) {
+    @Column({ unique: true })
+    codigoPessoaGerente: number;
+
+    constructor(nomeCompleto: string, clientes: Cliente[], codigoPessoaGerente: number) {
         this.id = uuidv4();
         this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
+        this.codigoPessoaGerente = gerarCodigoSequencial();
 
         nomeInvalidoException('JORGE AMADO');
     }

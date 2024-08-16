@@ -4,7 +4,6 @@ import { Cliente } from '../entities/cliente.entity';
 import { ContaBancaria } from '../entities/conta.entity';
 import { GerenteService } from './gerente.service';
 
-
 @Injectable()
 export class ClienteService {
     private clientes: Cliente[] = [];
@@ -16,15 +15,15 @@ export class ClienteService {
         return this.clientes;
     }
 
-    async createCliente(clienteDto: ClienteDto): Promise<Cliente> {
-        const { nomeCompleto, endereco, telefone, contas, gerenteId } = clienteDto;
+    async criarCliente(clienteDto: ClienteDto, codigoPessoaGerente: number): Promise<Cliente> {
+        const { nomeCompleto, endereco, telefone, contas } = clienteDto;
 
-        const gerente = await this.gerenteService.findOne(gerenteId);
+        const gerente = await this.gerenteService.findOne(codigoPessoaGerente);
         if (!gerente) {
-            throw new NotFoundException(`Pessoa gerente de id ${gerenteId} não encontrada.`);
+            throw new NotFoundException(`Pessoa gerente de código ${codigoPessoaGerente} não encontrada.`);
         }
 
-        const novoCliente = new Cliente(nomeCompleto, endereco, telefone, [], gerente);
+        const novoCliente = new Cliente(nomeCompleto, endereco, telefone, [], codigoPessoaGerente);
         this.clientes.push(novoCliente);
         gerente.adicionarCliente(novoCliente);
 

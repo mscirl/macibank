@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { GerenteDto } from "../../aplication/dtos/gerente.dto";
@@ -6,6 +6,7 @@ import { Cliente } from "../entities/cliente.entity";
 import { TipoConta } from "../entities/conta.entity";
 import { Gerente } from "../entities/gerente.entity";
 import { gerenteInvalidoException, nomeInvalidoException } from "../utilities/exceptions";
+import { gerarCodigoSequencial } from "../utilities/utility";
 
 @Injectable()
 export class GerenteService {
@@ -18,18 +19,36 @@ export class GerenteService {
         return this.gerenteRepository.find({ relations: ['clientes'] });
     }
 
-    async findOne(id: string): Promise<Gerente> {
+    async findOne(codigoPessoaGerente: number): Promise<Gerente> {
         const gerente = await this.gerenteRepository.findOne({
-            where: { id },
+            where: { codigoPessoaGerente },
             relations: ['clientes'],
         });
 
-        gerenteInvalidoException(gerente);
-        return gerente!;
+        if (!gerente) {
+            throw new NotFoundException(`Pessoa gerente de código ${codigoPessoaGerente} não encontrada.`);
+        }
+
+        return gerente;
     }
 
-    async adicionarCliente(id: string, cliente: Cliente): Promise<Gerente> {
-        const gerente = await this.findOne(id);
+    async findByCodigo(codigoPessoaGerente: number): Promise<Gerente> {
+        const gerente = await this.gerenteRepository.findOne({
+            where: { codigoPessoaGerente },
+            relations: ['clientes'],
+        });
+    
+        if (!gerente) {
+            throw new NotFoundException(`Pessoa gerente de código ${codigoPessoaGerente} não encontrada.`);
+        }
+    
+        return gerente;
+    }
+
+
+
+    async adicionarCliente(codigoPessoaGerente: number, cliente: Cliente): Promise<Gerente> {
+        const gerente = await this.findOne(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
         gerente.adicionarCliente(cliente);
@@ -40,16 +59,19 @@ export class GerenteService {
     async criarGerente(gerenteDto: GerenteDto): Promise<Gerente> {
         nomeInvalidoException(gerenteDto.nomeCompleto);
         
+        const codigoPessoaGerente = gerarCodigoSequencial();
+
         const novoGerente = this.gerenteRepository.create({
-            ...gerenteDto,  // aqui os pontos passam todos os dados do DTO
+            ...gerenteDto,
+            codigoPessoaGerente,
         });
 
-        // Salva o novo gerente no banco de dados
-        return this.gerenteRepository.save(novoGerente);
+        const gerenteSalvo = await this.gerenteRepository.save(novoGerente);
+        return gerenteSalvo;
     }
 
-    async removerCliente(id: string, clienteId: string): Promise<Gerente> {
-        const gerente = await this.findOne(id);
+    async removerCliente(codigoPessoaGerente: number, clienteId: string): Promise<Gerente> {
+        const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
         const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
@@ -59,8 +81,8 @@ export class GerenteService {
         return gerente;
     }
 
-    async abrirConta(id: string, clienteId: string, tipo: TipoConta, saldoInicial: number): Promise<Gerente> {
-        const gerente = await this.findOne(id);
+    async abrirConta(codigoPessoaGerente: number, clienteId: string, tipo: TipoConta, saldoInicial: number): Promise<Gerente> {
+        const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
         const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
@@ -70,19 +92,23 @@ export class GerenteService {
         return gerente;
     }
 
-    async fecharConta(id: string, contaNumero: string): Promise<Gerente> {
-        const gerente = await this.findOne(id);
+    async fecharConta(codigoPessoaGerente: number, contaNumero: string): Promise<Gerente> {
+        const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
-        const cliente = gerente.clientes.find(cliente => cliente.id === id);
+        const cliente = gerente.clientes.find(cliente => cliente.contas.some(conta => conta.numeroConta === contaNumero));
+
+        if (!cliente) {
+            throw new NotFoundException(`Conta de número ${contaNumero} não encontrada para pessoa gerente de código ${codigoPessoaGerente}.`);
+        }
 
         gerente.fecharConta(cliente!, contaNumero);
         await this.gerenteRepository.save(gerente);
         return gerente;
     }
 
-    async modificarConta(id: string, clienteId: string, contaNumero: string, novoTipo: TipoConta): Promise<Gerente> {
-        const gerente = await this.findOne(id);
+    async modificarConta(codigoPessoaGerente: number, clienteId: string, contaNumero: string, novoTipo: TipoConta): Promise<Gerente> {
+        const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
         const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
