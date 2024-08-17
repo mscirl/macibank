@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
 import { TipoConta } from '../../domain/enums/conta.enum';
+import { contaBancariaInvalidaException } from '../../domain/utilities/exceptions';
 
 export class ContaBancariaDto {
     @IsString()
@@ -18,5 +19,7 @@ export class ContaBancariaDto {
         this.numeroConta = numeroConta;
         this.saldo = saldo;
         this.tipo = tipo;
+        contaBancariaInvalidaException(this.numeroConta);
+
     }
 }

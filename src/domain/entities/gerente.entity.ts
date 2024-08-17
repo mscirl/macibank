@@ -1,7 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
-import { nomeInvalidoException } from '../utilities/exceptions';
 import { gerarCodigoSequencial, gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
 import { ContaBancaria } from './conta.entity';
@@ -26,8 +25,6 @@ export class Gerente {
         this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
         this.codigoPessoaGerente = gerarCodigoSequencial();
-
-        nomeInvalidoException('JORGE AMADO');
     }
 
     adicionarCliente(cliente: Cliente): void {

@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
+import { nomeInvalidoException } from '../../domain/utilities/exceptions';
 import { ClienteDto } from './cliente.dto';
 
 export class GerenteDto {
@@ -16,5 +17,6 @@ export class GerenteDto {
     constructor(nomeCompleto: string, clientes?: ClienteDto[]) {
         this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
+        nomeInvalidoException(nomeCompleto);
     }
 }

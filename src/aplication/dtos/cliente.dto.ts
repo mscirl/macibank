@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { nomeInvalidoException } from '../../domain/utilities/exceptions';
 import { ContaBancariaDto } from './conta.dto';
 
 export class ClienteDto {
@@ -25,5 +26,6 @@ export class ClienteDto {
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
+        nomeInvalidoException(nomeCompleto);
     }
 }

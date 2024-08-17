@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
-import { contaBancariaInvalidaException } from '../utilities/exceptions';
 import { gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
 import { metodoDePagamento } from './metodos-de-pagamento.entity';
@@ -29,8 +28,6 @@ export class ContaBancaria {
         this.numeroConta = numeroConta;
         this.saldo = saldo;
         this.tipo = tipo;
-    
-        contaBancariaInvalidaException(this.numeroConta);
     }
 
     pagar(valor: number, metodoDePagamento: metodoDePagamento): void {

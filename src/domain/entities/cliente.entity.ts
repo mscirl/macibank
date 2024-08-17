@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
-import { nomeInvalidoException } from '../utilities/exceptions';
 import { gerarCodigoSequencial } from '../utilities/utility';
 import { ContaBancaria } from './conta.entity';
 
@@ -33,7 +32,6 @@ export class Cliente {
         this.contas = contas;
         this.codigoPessoaGerente = codigoPessoaGerente ?? gerarCodigoSequencial(); //aqui eu verifico se o código da pessoa gerente já existe,
                                                                                    //caso não exista, vai utilizar da function gerarCodigoSequencial para tal
-        nomeInvalidoException('GAL COSTA');
 
     }
 
