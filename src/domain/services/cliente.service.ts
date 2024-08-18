@@ -23,7 +23,7 @@ export class ClienteService {
             throw new NotFoundException(`Pessoa gerente de código ${codigoPessoaGerente} não encontrada.`);
         }
 
-        const novoCliente = new Cliente(nomeCompleto, endereco, telefone, [], codigoPessoaGerente);
+        const novoCliente = new Cliente(nomeCompleto, endereco, telefone, [], codigoPessoaGerente, codigoPessoaGerente);
         this.clientes.push(novoCliente);
         gerente.adicionarCliente(novoCliente);
 

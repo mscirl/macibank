@@ -4,7 +4,7 @@ import { GerenteDto } from '../../aplication/dtos/gerente.dto';
 import { Cliente } from '../../domain/entities/cliente.entity';
 import { Gerente } from '../../domain/entities/gerente.entity';
 import { TipoConta } from '../../domain/enums/conta.enum';
-import { ClienteService } from '../../domain/services/cliente.service'; // Adicione a importação
+import { ClienteService } from '../../domain/services/cliente.service';
 import { GerenteService } from '../../domain/services/gerente.service';
 
 @Controller('gerente')
@@ -39,14 +39,13 @@ export class GerenteController {
     }
 
     @Put(':id/abrir-conta')
-    async abrirConta(@Param('id') id: string, @Body() dados: { clienteId: string; tipo: TipoConta; saldoInicial: number }): Promise<Gerente> {
-        const codigo = Number(id);
-        return this.gerenteService.abrirConta(codigo, dados.clienteId, dados.tipo, dados.saldoInicial);
+    async abrirConta(@Param('id') codigoPessoaGerente: number, @Body() dados: { codigoPessoaCliente:number, tipo: TipoConta; saldoInicial: number }): Promise<Gerente> {
+        return this.gerenteService.abrirConta(codigoPessoaGerente, dados.codigoPessoaCliente, dados.tipo, dados.saldoInicial);
     }
 
     @Put(':id/fechar-conta')
     async fecharConta(@Param('id') id: string, @Body() dados: { contaNumero: string }): Promise<Gerente> {
-        const codigo = Number(id); 
+        const codigo = Number(id);
         return this.gerenteService.fecharConta(codigo, dados.contaNumero);
     }
 

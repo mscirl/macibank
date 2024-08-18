@@ -70,24 +70,27 @@ export class GerenteService {
         return gerenteSalvo;
     }
 
-    async removerCliente(codigoPessoaGerente: number, clienteId: string): Promise<Gerente> {
+    async removerCliente(codigoPessoaGerente: number, codigoPessoaCliente: number): Promise<Gerente> {
         const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
-        const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+        const cliente = gerente.clientes.find(cliente => cliente.codigoPessoaCliente === codigoPessoaCliente);
 
         gerente.removerCliente(cliente!.id);
         await this.gerenteRepository.save(gerente);
         return gerente;
     }
 
-    async abrirConta(codigoPessoaGerente: number, clienteId: string, tipo: TipoConta, saldoInicial: number): Promise<Gerente> {
+    async abrirConta(codigoPessoaGerente: number, codigoPessoaCliente: number, tipo: TipoConta, saldoInicial: number): Promise<Gerente> {
         const gerente = await this.findByCodigo(codigoPessoaGerente);
         gerenteInvalidoException(gerente);
 
-        const cliente = gerente.clientes.find(cliente => cliente.id === clienteId);
+        const cliente = gerente.clientes.find(cliente => cliente.codigoPessoaCliente === codigoPessoaCliente);
+        if (!cliente) {
+            throw new NotFoundException(`Pessoa cliente de código ${codigoPessoaCliente} não encontrada.`);
+        }
 
-        gerente.abrirConta(cliente!, tipo, saldoInicial);
+        gerente.abrirConta(cliente, tipo, saldoInicial);
         await this.gerenteRepository.save(gerente);
         return gerente;
     }

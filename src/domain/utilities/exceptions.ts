@@ -7,7 +7,7 @@ export class NomeInvalidoException extends Error {
     }
 }
 
-export function nomeInvalidoException(nomeCompleto: string | undefined) { // pra não dar erro quando o nome não for declarado
+export function nomeInvalidoException(nomeCompleto: string | undefined) {
     console.log("Validando nome completo:", nomeCompleto);
     if (!nomeCompleto || typeof nomeCompleto !== 'string') {
         throw new NomeInvalidoException();

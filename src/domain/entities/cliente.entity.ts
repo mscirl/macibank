@@ -21,15 +21,19 @@ export class Cliente {
     @OneToMany(() => ContaBancaria, (conta) => conta.cliente)
     contas: ContaBancaria[];
 
+    @Column({ unique: true})
+    codigoPessoaCliente: number;
+
     @Column({ unique: true })
     codigoPessoaGerente: number;
 
-    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], codigoPessoaGerente: number) {
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], codigoPessoaCliente: number, codigoPessoaGerente: number) {
         this.id = uuidv4();
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
+        this.codigoPessoaCliente = gerarCodigoSequencial();
         this.codigoPessoaGerente = codigoPessoaGerente ?? gerarCodigoSequencial(); //aqui eu verifico se o código da pessoa gerente já existe,
                                                                                    //caso não exista, vai utilizar da function gerarCodigoSequencial para tal
 

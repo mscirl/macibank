@@ -1,13 +1,12 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
-import { nomeInvalidoException } from '../../domain/utilities/exceptions';
+import { IsArray, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { ContaBancariaDto } from './conta.dto';
 
 export class ClienteDto {
     @IsString()
     @IsNotEmpty({ message: 'Por favor, informe o nome completo da pessoa cliente.' })
     nomeCompleto: string;
-
+    
     @IsString()
     @IsNotEmpty({ message: 'Por favor, digite um endereço válido.' })
     endereco: string;
@@ -21,11 +20,15 @@ export class ClienteDto {
     @Type(() => ContaBancariaDto)
     contas: ContaBancariaDto[];
 
-    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancariaDto[]) {
+    @IsNumber()
+    codigoPessoaGerente: number;
+
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancariaDto[], codigoPessoaGerente: number) {
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
-        nomeInvalidoException(nomeCompleto);
+        this.codigoPessoaGerente = codigoPessoaGerente;
     }
+
 }

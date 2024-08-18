@@ -8,13 +8,15 @@ export class ClienteController {
     constructor(private readonly clienteService: ClienteService) {}
 
     @Post('criar')
-    async createCliente(@Body() clienteDto: ClienteDto, codigoPessoaGerente: number): Promise<Cliente> {
+    async criarCliente(@Body() clienteDto: ClienteDto): Promise<Cliente> {
+        const {codigoPessoaGerente} = clienteDto;
+
         try {
             return await this.clienteService.criarCliente(clienteDto, codigoPessoaGerente);
         } catch (error: any) {
-            throw new HttpException(error.message, HttpStatus.BAD_REQUEST)
+            throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
         }
-        }
+    }
 
     @Get('consultar')
     async findAll(): Promise<Cliente[]> {
