@@ -1,17 +1,19 @@
 import { Type } from 'class-transformer';
-import { IsArray, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { ContaBancariaDto } from './conta.dto';
+import { GerenteDto } from './gerente.dto';
 
 export class ClienteDto {
     @IsString()
     @IsNotEmpty({ message: 'Por favor, informe o nome completo da pessoa cliente.' })
     nomeCompleto: string;
-    
+
     @IsString()
     @IsNotEmpty({ message: 'Por favor, digite um endereço válido.' })
     endereco: string;
 
     @IsString()
+    @IsPhoneNumber('BR', { message: 'Número de telefone inválido' })
     @IsNotEmpty({ message: 'Informe um número de telefone para continuar.' })
     telefone: string;
 
@@ -20,15 +22,14 @@ export class ClienteDto {
     @Type(() => ContaBancariaDto)
     contas: ContaBancariaDto[];
 
-    @IsNumber()
-    codigoPessoaGerente: number;
+    @IsOptional()
+    gerente: GerenteDto;
 
-    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancariaDto[], codigoPessoaGerente: number) {
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancariaDto[], gerente: GerenteDto) {
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
-        this.codigoPessoaGerente = codigoPessoaGerente;
+        this.gerente = gerente;
     }
-
 }

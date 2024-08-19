@@ -8,15 +8,20 @@ export class GerenteDto {
     @IsNotEmpty()
     nomeCompleto: string;
 
+    @IsOptional()
+    codigoPessoa: number;
+
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => ClienteDto)
     @IsOptional()
     clientes?: ClienteDto[];
 
-    constructor(nomeCompleto: string, clientes?: ClienteDto[]) {
+
+    constructor(nomeCompleto: string, codigoPessoa: number, clientes?: ClienteDto[]) {
         this.nomeCompleto = nomeCompleto;
         this.clientes = clientes;
+        this.codigoPessoa = codigoPessoa;
         nomeInvalidoException(nomeCompleto);
     }
 }

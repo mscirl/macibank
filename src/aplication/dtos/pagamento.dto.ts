@@ -17,6 +17,6 @@ constructor(numeroConta: string, valor: number, metodo: string){
     this.numeroConta = numeroConta;
     this.valor = valor;
     this.metodo = metodo;
-}
+    }
 
 }

@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
 import { TipoConta } from '../enums/conta.enum';
-import { gerarNumeroConta } from '../utilities/utility';
 import { Cliente } from './cliente.entity';
 import { metodoDePagamento } from './metodos-de-pagamento.entity';
 
@@ -22,7 +21,7 @@ export class ContaBancaria {
     @ManyToOne(() => Cliente, (cliente) => cliente.contas)
     cliente: Cliente;
 
-    constructor(cliente: Cliente, numeroConta: string = gerarNumeroConta(), saldo: number, tipo: TipoConta) {
+    constructor(cliente: Cliente, numeroConta: string, saldo: number, tipo: TipoConta) {
         this.id = uuidv4();
         this.cliente = cliente;
         this.numeroConta = numeroConta;

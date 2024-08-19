@@ -2,7 +2,7 @@ import { Gerente } from "../entities/gerente.entity";
 
 export class NomeInvalidoException extends Error {
     constructor() {
-        super('Digite um nome completo válido para prosseguir por favor.');
+        super('O nome completo deve conter pelo menos duas palavras. Digite um nome completo válido para prosseguir, por favor.');
         this.name = 'NomeInvalidoException';
     }
 }
@@ -17,8 +17,6 @@ export function nomeInvalidoException(nomeCompleto: string | undefined) {
         throw new NomeInvalidoException();
     }
 }
-
-
 
 
 export class ContaBancariaInvalidaException extends Error {

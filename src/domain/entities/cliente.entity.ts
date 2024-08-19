@@ -1,8 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
-import { gerarCodigoSequencial } from '../utilities/utility';
 import { ContaBancaria } from './conta.entity';
-
+import { Gerente } from './gerente.entity';
 
 @Entity()
 export class Cliente {
@@ -22,22 +21,19 @@ export class Cliente {
     contas: ContaBancaria[];
 
     @Column({ unique: true})
-    codigoPessoaCliente: number;
+    codigoPessoa: number;
 
-    @Column({ unique: true })
-    codigoPessoaGerente: number;
+    @ManyToOne(() => Gerente, (gerente) => gerente.clientes, { nullable: true }) //aqui estou permitindo que gerente seja null
+    gerente: Gerente | null;                                                     //pois o cliente pode ser criado inicialmente sem um gerente
 
-    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], codigoPessoaCliente: number, codigoPessoaGerente: number) {
+    constructor(nomeCompleto: string, endereco: string, telefone: string, contas: ContaBancaria[], codigoPessoa: number, gerente: Gerente | null = null) {
         this.id = uuidv4();
         this.nomeCompleto = nomeCompleto;
         this.endereco = endereco;
         this.telefone = telefone;
         this.contas = contas;
-        this.codigoPessoaCliente = gerarCodigoSequencial();
-        this.codigoPessoaGerente = codigoPessoaGerente ?? gerarCodigoSequencial(); //aqui eu verifico se o código da pessoa gerente já existe,
-                                                                                   //caso não exista, vai utilizar da function gerarCodigoSequencial para tal
-
+        this.codigoPessoa = codigoPessoa;
+        this.gerente = gerente;
     }
-
     
 }

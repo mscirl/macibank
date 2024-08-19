@@ -1,35 +1,22 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { ClienteDto } from '../../aplication/dtos/cliente.dto';
 import { GerenteDto } from '../../aplication/dtos/gerente.dto';
 import { Cliente } from '../../domain/entities/cliente.entity';
 import { Gerente } from '../../domain/entities/gerente.entity';
 import { TipoConta } from '../../domain/enums/conta.enum';
-import { ClienteService } from '../../domain/services/cliente.service';
 import { GerenteService } from '../../domain/services/gerente.service';
 
 @Controller('gerente')
 export class GerenteController {
-    constructor(private readonly gerenteService: GerenteService, private readonly clienteService: ClienteService) {}
+    constructor(private readonly gerenteService: GerenteService) {}
 
-    @Get(':id')
-    async findOne(@Param('id') id: string): Promise<Gerente> {
-        const codigo = Number(id);
-        return this.gerenteService.findOne(codigo);
-    }
-
-    @Post(':codigoPessoaGerente')
-    async criarCliente(
-        @Param('codigoPessoaGerente') codigoPessoaGerente: string,
-        @Body() clienteDto: ClienteDto,
-    ) {
-        const codigo = Number(codigoPessoaGerente);
-        return this.clienteService.criarCliente(clienteDto, codigo);
+    @Get(':codigoPessoaGerente')
+    async findOne(@Param('codigoPessoa') codigo: string): Promise<Gerente> {
+        return this.gerenteService.findOne(Number(codigo));
     }
 
     @Post('criar')
-    async create(@Body() gerenteDto: GerenteDto): Promise<{ codigoPessoaGerente: number }> {
-        const gerente = await this.gerenteService.criarGerente(gerenteDto);
-        return { codigoPessoaGerente: gerente.codigoPessoaGerente };
+    async create(@Body() gerenteDto: GerenteDto): Promise<{ codigoPessoa: number }> {
+        return this.gerenteService.criarGerente(gerenteDto);
     }
 
     @Put(':id/adicionar-cliente')
@@ -39,8 +26,8 @@ export class GerenteController {
     }
 
     @Put(':id/abrir-conta')
-    async abrirConta(@Param('id') codigoPessoaGerente: number, @Body() dados: { codigoPessoaCliente:number, tipo: TipoConta; saldoInicial: number }): Promise<Gerente> {
-        return this.gerenteService.abrirConta(codigoPessoaGerente, dados.codigoPessoaCliente, dados.tipo, dados.saldoInicial);
+    async abrirConta(@Param('id') codigoPessoa: number, @Body() dados: { tipo: TipoConta; saldoInicial: number }): Promise<Gerente> {
+        return this.gerenteService.abrirConta (codigoPessoa, dados.tipo, dados.saldoInicial);
     }
 
     @Put(':id/fechar-conta')
